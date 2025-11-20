@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>12_R_1</title>
+    <desc>Created with Sketch.</desc>
+    <g id="12_R_1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id=".notavailableDark" fill="#B1B1B1" x="4" y="3" width="17" height="18" rx="2"></rect>
+        <rect id=".notavailableLight" fill="#FFFFFF" x="5" y="4" width="15" height="16" rx="1"></rect>
+        <path d="M4,1 L16,1 C17.1045695,1 18,1.8954305 18,3 L18,4 C18,5.1045695 17.1045695,6 16,6 L4,6 L4,6 L4,1 Z" id=".notavailableDark" fill="#B1B1B1"></path>
+        <path d="M5,2 L16,2 C16.5522847,2 17,2.44771525 17,3 L17,4 C17,4.55228475 16.5522847,5 16,5 L5,5 L5,5 L5,2 Z" id=".notavailableMedium" fill="#FFFFFF"></path>
+        <path d="M4,18 L16,18 C17.1045695,18 18,18.8954305 18,20 L18,21 C18,22.1045695 17.1045695,23 16,23 L4,23 L4,23 L4,18 Z" id=".notavailableDark" fill="#B1B1B1"></path>
+        <path d="M5,19 L16,19 C16.5522847,19 17,19.4477153 17,20 L17,21 C17,21.5522847 16.5522847,22 16,22 L5,22 L5,22 L5,19 Z" id=".notavailableMedium" fill="#FFFFFF"></path>
+        <path d="M0,4 L3,4 C4.65685425,4 6,5.34314575 6,7 L6,17 C6,18.6568542 4.65685425,20 3,20 L0,20 L0,20 L0,4 Z" id=".notavailableDark" fill="#B1B1B1"></path>
+        <path d="M1,5 L3,5 C4.1045695,5 5,5.8954305 5,7 L5,17 C5,18.1045695 4.1045695,19 3,19 L1,19 L1,19 L1,5 Z" id=".notavailableMedium" fill="#FFFFFF"></path>
+        <g id="Cross" transform="translate(5.388655, 4.270464)" stroke="#B1B1B1">
+            <line x1="3.55271368e-14" y1="14.2141777" x2="14.611345" y2="-4.4408921e-15" id="Line"></line>
+            <line x1="3.55271368e-14" y1="15.3504263" x2="14.611345" y2="1.13624864" id="Line" transform="translate(7.305672, 8.243337) scale(1, -1) translate(-7.305672, -8.243337) "></line>
+        </g>
+    </g>
+</svg>

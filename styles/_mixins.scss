@@ -1,0 +1,15 @@
+@use 'variables' as *;
+
+@mixin flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin storyScript ($size){
+    font-family: StoryScript;
+    font-size: $size;
+    text-align: center;
+    letter-spacing: 0.05em;
+    color: $primaryColor;
+}

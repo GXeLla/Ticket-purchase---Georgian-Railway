@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="10px" height="18px" viewBox="0 0 10 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>00 Webcore Base/2. Icons/Graf_Res/Interieur Icons/220</title>
+    <g id="00-Webcore-Base/2.-Icons/Graf_Res/Interieur-Icons/220" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="00-Webcore-Base/2.-Icons/Graf_Res/Seat-Icons/12_R_2" transform="translate(5.000000, 9.000000) rotate(-180.000000) translate(-5.000000, -9.000000) ">
+            <rect id=".availableDark" fill="#B1B1B1" x="4" y="0" width="6" height="18" rx="2"></rect>
+            <rect id=".availableLight" fill="#F4F4F4" x="5" y="1" width="4" height="16" rx="1"></rect>
+            <path d="M0,1 L3,1 C4.65685425,1 6,2.34314575 6,4 L6,14 C6,15.6568542 4.65685425,17 3,17 L0,17 L0,17 L0,1 Z" id=".availableDark" fill="#B1B1B1"></path>
+            <path d="M1,2 L3,2 C4.1045695,2 5,2.8954305 5,4 L5,14 C5,15.1045695 4.1045695,16 3,16 L1,16 L1,16 L1,2 Z" id=".availableMedium" fill="#F4F4F4"></path>
+        </g>
+    </g>
+</svg>

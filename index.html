@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Georgian Trains</title>
+    <link rel="icon" href="./pictures/Logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="./styles/styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <a href="#" class="logo">
+          <img src="./pictures/Logo.png" alt="" />
+          <h1>Georgian Trains</h1>
+        </a>
+        <ul>
+          <li><a href="#">Log in</a></li>
+          <li id="main-container-lang-changer">
+            <div onclick="toggleDropdown('languageChanger-dropdown')">
+              <img src="./pictures/languge.svg" alt="" id="language-icon" />
+            </div>
+            <div id="languageChanger-dropdown" class="dropdown">
+              <div class="option" onclick="setLanguage('Eng')">ENGLISH</div>
+              <div class="option" onclick="setLanguage('Ka')">ქართული</div>
+            </div>
+          </li>
+          <li><a href="#">Euro</a></li>
+        </ul>
+      </nav>
+
+      <!--  -->
+      <img
+        src="./pictures/background_2023_landscape_2400_1250_compressed.png"
+        alt=""
+        id="Hero-bg"
+      />
+
+      <!--  -->
+      <form class="main-container-form">
+        <div class="day-selector box-input" id="openPicker">
+          <label for="date" class="box-input-day">
+            <div class="month"></div>
+            <div class="day"></div>
+          </label>
+          <input type="date" id="date" />
+          <img src="./pictures/date-icon-png-5.png" alt="" id="dateImage" />
+        </div>
+
+        <div class="direction-selector">
+          <div id="departure-container">
+            <input
+              required
+              readonly
+              type="text"
+              id="departure-selector"
+              placeholder="Select Departure City"
+              autocomplete="off"
+              onclick="toggleDropdown('departure-dropdown')"
+            />
+            <div id="departure-dropdown" class="dropdown"></div>
+          </div>
+
+          <div class="swapper" onclick="swapCities()">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path
+                d="m21.71 9.29-4-4a1 1 0 0 0-1.42 1.42L18.59 9H7a1 1 0 0 0 0 2h14a1 1 0 0 0 .92-.62 1 1 0 0 0-.21-1.09M17 13H3a1 1 0 0 0-.92.62 1 1 0 0 0 .21 1.09l4 4a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.42L5.41 15H17a1 1 0 0 0 0-2"
+              ></path>
+            </svg>
+          </div>
+
+          <div id="arrival-container">
+            <input
+              required
+              readonly
+              type="text"
+              id="arrival-selector"
+              placeholder="Select Arrival City"
+              autocomplete="off"
+              onclick="toggleDropdown('arrival-dropdown')"
+            />
+            <div id="arrival-dropdown" class="dropdown"></div>
+          </div>
+        </div>
+
+        <div class="box-input" id="counter-container">
+          <button
+            id="btn-form-tkt-increment"
+            type="button"
+            onclick="increment()"
+          >
+            +
+          </button>
+          <button
+            id="btn-form-tkt-decrement"
+            type="button"
+            onclick="decrement()"
+          >
+            -
+          </button>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path
+              d="M15.71 12.71a6 6 0 1 0-7.42 0 10 10 0 0 0-6.22 8.18 1 1 0 0 0 2 .22 8 8 0 0 1 15.9 0 1 1 0 0 0 1 .89h.11a1 1 0 0 0 .88-1.1 10 10 0 0 0-6.25-8.19M12 12a4 4 0 1 1 4-4 4 4 0 0 1-4 4"
+            ></path>
+          </svg>
+          <span id="tkt-counter">X<span id="tkt-count"></span></span>
+        </div>
+        <button type="submit" class="btn" onclick="submitForm()">
+          <span class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path
+                d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a1 1 0 0 0 1.42 0 1 1 0 0 0 0-1.39M11 18a7 7 0 1 1 7-7 7 7 0 0 1-7 7"
+              ></path>
+            </svg>
+          </span>
+          <span id="search-trains-text"> Search Trains </span>
+        </button
+        >
+      </form>
+    </header>
+    <!-- bycicle man dog svg  -->
+    <!-- <svg
+        width="100%"
+        height="100%"
+        fill="none"
+        viewBox="0 0 40 28"
+        fit=""
+        preserveAspectRatio="xMidYMid meet"
+        focusable="false"
+      >
+        <path d="M0 0h40v28H0z"></path>
+        <path
+          fill="#000"
+          fill-rule="evenodd"
+          d="M37.65 18.043c1.515-.083 1.64-.468 1.64-1.681 0-.268-.42-.337-.42-.337-.913.052-.946.143-1.812-.61a6 6 0 0 0-1.11-.09c-.11-.476-.849-1.444-.882-1.45-.132-.416-.423 1.021-.479 1.302-.009.044.12.49.192.775-.199.391-.272.987-.264 1.856-.526.507-3.914 4.065-4.322 3.91-.862-.328-1.536-1.474-.674-1.494.37-.01.936.063.95-.334-.07-.205-.475-.45-1.385-.156-.942.305-.626 1.907.678 2.471l.023.032c.466.602 1.206 1.595 1.55 1.8h3.436c1.08 0 .599-1.039.032-1.095l-.895-.062c-.128-1.018.576-.885 1.662-1.285.274.68.416 1.029.691 1.708.203.502.289.703.876.703h1.023l-1.726-4.679c-.375-1.03.394-1.24 1.216-1.284M12.098 13.183h1.88l.88 3.444-5.25 1.462-.987-2.745h.915a.625.625 0 0 0 0-1.25H5.99a.625.625 0 1 0 0 1.25h1.304l1.108 3.08-.726.203a3.692 3.692 0 0 0-6.963 1.717 3.693 3.693 0 1 0 7.348-.527l5.27-1.467a3.693 3.693 0 1 0 2.828-1.684l-1.09-4.263a.625.625 0 0 0-.605-.47h-2.365a.625.625 0 1 0 0 1.25m3.164 5.023.57 2.23a.625.625 0 1 0 1.211-.31l-.567-2.22a2.443 2.443 0 1 1-1.214.3m-10.857-.305a2.44 2.44 0 0 1 2.022 1.073l-2.532.705.335 1.204 2.61-.726q.007.093.007.187a2.443 2.443 0 1 1-2.442-2.443"
+          clip-rule="evenodd"
+        ></path>
+        <path
+          fill="#000"
+          d="M24.23 7.643q-.79 0-1.346-.56a1.84 1.84 0 0 1-.556-1.35q0-.79.56-1.346.558-.556 1.35-.556.79 0 1.346.56.555.558.556 1.35 0 .79-.56 1.346-.558.556-1.35.556m-.956 16.516a.93.93 0 0 1-.946-.953v-5.4h-.317a.93.93 0 0 1-.683-.27.93.93 0 0 1-.27-.682v-5.4q0-.786.56-1.346t1.345-.56h2.541q.786 0 1.346.56t.56 1.346v5.4q0 .413-.27.683a.93.93 0 0 1-.683.27h-.317v5.4a.92.92 0 0 1-.275.678.93.93 0 0 1-.68.274z"
+        ></path>
+      </svg> -->
+    <!-- profile pic on sign in  -->
+    <!-- <svg
+      width="100%"
+      height="100%"
+      fit=""
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M12 6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2m0 10c2.7 0 5.8 1.29 6 2H6c.23-.72 3.31-2 6-2m0-12C9.79 4 8 5.79 8 8s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4m0 10c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4"
+      ></path>
+    </svg> -->
+    <!-- on hover  -->
+    <!-- <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 24 24"
+      fit=""
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+    >
+      <path
+        fill="currentColor"
+        fill-rule="evenodd"
+        d="M12 12c2.486 0 4.5-2.014 4.5-4.5S14.486 3 12 3a4.5 4.5 0 0 0-4.5 4.5A4.5 4.5 0 0 0 12 12m0 2.25c-3.004 0-9 1.508-9 4.5V21h18v-2.25c0-2.992-5.996-4.5-9-4.5"
+      ></path>
+    </svg> -->
+    <!-- time svg  -->
+    <!-- <svg
+      width="100%"
+      height="100%"
+      fit=""
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10A10.01 10.01 0 0 0 22 12 10.01 10.01 0 0 0 11.99 2M12 20a8 8 0 1 1 0-16 8 8 0 1 1 0 16m.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"
+      ></path>
+    </svg> -->
+    <!-- date svg  -->
+    <!-- <svg
+      width="100%"
+      height="100%"
+      fit=""
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M19 3h-1V1h-2v2H8V1H6v2H5a1.99 1.99 0 0 0-1.99 2L3 19a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2m0 16H5V8h14zM7 10h5v5H7z"
+      ></path>
+    </svg> -->
+    <!-- back and forth svg between destinations  -->
+    <!-- <svg
+      width="100%"
+      height="100%"
+      viewBox="0 0 20 20"
+      fit=""
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+    >
+      <g fill="none" fill-rule="evenodd">
+        <path d="M0 0h20v20H0z"></path>
+        <path
+          fill="#000"
+          fill-rule="nonzero"
+          d="M18.334 6.666 15 3.333v2.5H2.5V7.5H15V10zM1.667 13.333 5 16.666v-2.5h12.5V12.5H5V10z"
+        ></path>
+      </g>
+    </svg> -->
+    <!-- scg for destination tab From-to -->
+    <!-- <svg
+      width="100%"
+      height="100%"
+      fit=""
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M5.324 10.686c0 1.15-.912 2.084-2.037 2.084s-2.037-.933-2.037-2.084c0-1.15.912-2.083 2.037-2.083s2.037.933 2.037 2.083m3.056-.066c0 .539-.456.976-1.019.976s-1.018-.437-1.018-.976.456-.975 1.018-.975 1.019.436 1.019.975m3.055 0c0 .539-.456.976-1.018.976s-1.019-.437-1.019-.976.456-.975 1.019-.975 1.018.436 1.018.975m3.056 0c0 .539-.456.976-1.019.976s-1.018-.437-1.018-.976.456-.975 1.018-.975 1.019.436 1.019.975m5.092.066c0 1.15-.912 2.084-2.037 2.084s-2.037-.933-2.037-2.084c0-1.15.912-2.083 2.037-2.083s2.037.933 2.037 2.083"
+      ></path>
+    </svg> -->
+    <!-- invalidis nishani  -->
+    <!-- <svg
+      width="100%"
+      height="100%"
+      fit=""
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M19 13v-1.999c-1.541.019-3.09-.75-4.07-1.83l-1.29-1.43a1.9 1.9 0 0 0-.61-.45c-.011 0-.011-.01-.02-.01H13c-.36-.209-.776-.3-1.19-.26C10.76 7.11 10 8.04 10 9.09V15c0 1.1.9 2 1.999 2h5v5h2v-5.5c0-1.1-.9-2-2-2h-3v-3.45c1.29 1.07 3.25 1.94 5.001 1.95m-10.001-.9v2.07A3.02 3.02 0 0 0 7 17.001c0 1.66 1.339 3 3 3 1.309 0 2.419-.84 2.83-2h2.07a5 5 0 0 1-3.46 3.788 5 5 0 0 1-4.975-1.253 5 5 0 0 1-1.253-4.975A5 5 0 0 1 9 12.101zm3-10.099a2 2 0 0 1 1.446.568A2 2 0 0 1 14.049 4a2 2 0 0 1-.603 1.432A2 2 0 0 1 11.999 6a2 2 0 0 1-1.951-2 2 2 0 0 1 1.951-2z"
+      ></path>
+    </svg> -->
+    <!-- bycicle  -->
+    <!-- <svg
+      fill="none"
+      viewBox="0 0 22 14"
+      fit=""
+      height="100%"
+      width="100%"
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+    >
+      <path
+        fill="currentColor"
+        fill-rule="evenodd"
+        d="M12.9 1.556h2.131l.998 3.903-5.948 1.656-1.12-3.11h1.037a.708.708 0 0 0 0-1.416H5.98a.708.708 0 0 0 0 1.416h1.478l1.255 3.49-.823.23a4.184 4.184 0 1 0 .437 1.349l5.971-1.663a4.184 4.184 0 1 0 3.204-1.907L16.268.673a.71.71 0 0 0-.686-.533h-2.68a.708.708 0 0 0 0 1.416m3.586 5.692.646 2.527a.708.708 0 1 0 1.372-.351l-.643-2.515a2.768 2.768 0 1 1-1.375.34M4.184 6.903c.953 0 1.794.482 2.292 1.215l-2.87.799.38 1.364 2.958-.823q.008.105.008.212a2.768 2.768 0 1 1-2.768-2.767"
+        clip-rule="evenodd"
+      ></path>
+    </svg> -->
+    <!-- Train svg  -->
+    <!-- <svg
+      width="100%"
+      height="100%"
+      fit=""
+      preserveAspectRatio="xMidYMid meet"
+      focusable="false"
+    >
+      <path
+        fill-rule="evenodd"
+        d="M6.908 9.903a72 72 0 0 1 10.185 0l.162-1.886v-.005l.238-2.789a76 76 0 0 0-10.988 0l.268 3.12zM12.1 2c1.142-.003 6.452-.017 6.587 2.28l.642 8.746c-.79.326-2.147.751-3.959.806l-.608.018-.165 3.095a50 50 0 0 1-3.149.123 31 31 0 0 1-2.042-.078l-.168-3.138-.608-.018c-1.797-.056-3.157-.482-3.954-.808l.63-8.746c.135-2.297 5.459-2.283 6.603-2.28h.19zm5.255 19.2-1.614-2.624 1.195-.146 2.392 2.531-1.973.238zm-10.825.002-1.975-.242 2.394-2.53 1.194.144-1.613 2.627zm1.558-4.074-.016-.267-.099-1.856a12.8 12.8 0 0 1-3.389-.703 14 14 0 0 1-.565-.221c-.043.552-.034 1.299.213 1.965v.001c.015.024.27.446 2.259.836a23 23 0 0 0 1.597.245m11.329-2.829q.315-.114.562-.219c.045.55.035 1.295-.214 1.967-.002.003-.218.437-2.259.837a23 23 0 0 1-1.595.245l.016-.301.096-1.823a12.8 12.8 0 0 0 3.395-.706z"
+      ></path>
+    </svg> -->
+    <script src="./script/script.js"></script>
+  </body>
+</html>

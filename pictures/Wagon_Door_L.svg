@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="104px" viewBox="0 0 48 104" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
+    <title>65</title>
+    <desc>Created with Sketch.</desc>
+    <g id="65" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="int_3">
+            <g id="zugende_li">
+                <g id="Group-6">
+                    <g id="Planzeichnung/Treppen-links-oben" transform="translate(9.000000, 2.264637)">
+                        <g id="Planzeichnung/Treppen-links-unten" transform="translate(0.000000, 81.556193)">
+                            <g id="Treppen-lu" transform="translate(16.000000, 9.000000) scale(-1, -1) translate(-16.000000, -9.000000) ">
+                                <g id="Group-4" transform="translate(1.000000, 8.000000)"></g>
+                                <polygon id="Path-lu" stroke="#666666" transform="translate(15.973765, 8.983134) rotate(3.000000) translate(-15.973765, -8.983134) " points="1 1 30.270511 2.52331246 30.6085049 8.97262072 30.9475291 15.4415875 1.85489863 16.9662677 1.37910952 7.88767061"></polygon>
+                                <rect id="Quer-lu" fill="#666666" x="1.74447206" y="8.16234077" width="29.129363" height="1"></rect>
+                            </g>
+                        </g>
+                        <g id="Treppen-links-oben" transform="translate(16.000000, 9.000000) scale(-1, 1) translate(-16.000000, -9.000000) ">
+                            <g id="Treppen">
+                                <polygon id="Path-lo" stroke="#666666" transform="translate(15.973765, 8.983134) rotate(3.000000) translate(-15.973765, -8.983134) " points="1 1 30.270511 2.52331246 30.6085049 8.97262072 30.9475291 15.4415875 1.85489863 16.9662677 1.37910952 7.88767061"></polygon>
+                                <rect id="Quer-lo" fill="#666666" x="1.45644311" y="8.16234077" width="29" height="1"></rect>
+                            </g>
+                        </g>
+                    </g>
+                    <path d="M1.00084299,1.12357458 L1.07716585,102.884447 L47,97.8489644 L47,6.49125544 L1.00084299,1.12357458 Z" id="Train-Back" stroke="#666666" stroke-width="2" transform="translate(24.000000, 52.000000) scale(-1, 1) translate(-24.000000, -52.000000) "></path>
+                </g>
+            </g>
+            <rect id="Rectangle" fill="#FFFFFF" x="42.0446966" y="40.4804499" width="6" height="23.0091045"></rect>
+            <polygon id="Rectangle" fill="#B1B1B1" points="45.9950595 2.2414423 47.9905968 2.02616785 47.9950595 40.4804499 45.9950595 40.4804499"></polygon>
+            <polygon id="Rectangle" fill="#B1B1B1" transform="translate(46.950363, 82.753474) scale(1, -1) translate(-46.950363, -82.753474) " points="45.9503629 63.7052407 47.9459001 63.4895545 47.9503629 102.017393 45.9503629 102.017393"></polygon>
+        </g>
+        <polygon id="Triangle" fill="#666666" points="24 6 28 14 20 14"></polygon>
+        <polygon id="Triangle" fill="#666666" transform="translate(24.000000, 94.000000) scale(1, -1) translate(-24.000000, -94.000000) " points="24 90 28 98 20 98"></polygon>
+    </g>
+</svg>
