@@ -4,7 +4,6 @@ const increment = 2; // ღილაკზე დაჭერისას რა
 let cities = []; // სადგურების ჩამონათვალი, რომელიც გამოვა API-დან
 let trainsData = []; // მატარებლების მონაცემები, რომელსაც ვაჩვენებთ
 
-
 // Fetch stations & trains
 // ===========================
 async function fetchStationsAndTrains() {
@@ -22,9 +21,9 @@ async function fetchStationsAndTrains() {
     if (!trainsRes.ok) throw new Error("Failed to fetch trains");
     trainsData = await trainsRes.json();
 
-    // მინიმუმ 2 წამიანი ლოადინგ ანიმაცია
+    // მინიმუმ 1 წამიანი ლოადინგ ანიმაცია
     const elapsed = Date.now() - startTime;
-    const waitTime = Math.max(0, 2000 - elapsed);
+    const waitTime = Math.max(0, 1000 - elapsed);
     await new Promise((r) => setTimeout(r, waitTime));
 
     // ლოადინგის დამალვა
@@ -46,7 +45,6 @@ async function fetchStationsAndTrains() {
   }
 }
 
-
 // ურლ პარამეტრების წამოღება
 // ===========================
 function getParams() {
@@ -59,7 +57,6 @@ function getParams() {
   };
 }
 
-
 // ფილტრის ფორმა და მატარებლები
 // ===========================
 function displayResults(trains) {
@@ -67,57 +64,61 @@ function displayResults(trains) {
   const filterDiv = document.getElementById("search-filter");
   const todays = new Date().toISOString().split("T")[0];
 
-
   // ფილტრი
   // ---------------------------
   filterDiv.innerHTML = `
-    <form id="filter-form">
-      <div class="filter-card">
-        <label for="date">თარიღი</label>
-        <input type="date" id="date" name="date" value="${
-          date || ""
-        }" min="${todays}">
-      </div>
+  <form id="filter-form">
+    <div class="filter-card">
+      <label for="date">თარიღი</label>
+      <input type="date" id="date" name="date" value="${
+        date || ""
+      }" min="${todays}">
+    </div>
 
-      <div class="filter-card">
-        <label for="departure">საიდან</label>
-        <select id="departure" name="departure">
-          ${cities
-            .map(
-              (c) =>
-                `<option value="${c}" ${
-                  departure === c ? "selected" : ""
-                }>${c}</option>`
-            )
-            .join("")}
-        </select>
-      </div>
+    <div class="filter-card">
+      <label for="departure">საიდან</label>
+      <select id="departure" name="departure">
+        <option value="" disabled ${
+          !departure ? "selected" : ""
+        }>აირჩიეთ სადგური</option>
+        ${cities
+          .map(
+            (c) =>
+              `<option value="${c}" ${
+                departure === c ? "selected" : ""
+              }>${c}</option>`
+          )
+          .join("")}
+      </select>
+    </div>
 
-      <div class="filter-card">
-        <label for="arrival">სად</label>
-        <select id="arrival" name="arrival">
-          ${cities
-            .map(
-              (c) =>
-                `<option value="${c}" ${
-                  arrival === c ? "selected" : ""
-                }>${c}</option>`
-            )
-            .join("")}
-        </select>
-      </div>
+    <div class="filter-card">
+      <label for="arrival">სად</label>
+      <select id="arrival" name="arrival">
+        <option value="" disabled ${
+          !arrival ? "selected" : ""
+        }>აირჩიეთ სადგური</option>
+        ${cities
+          .map(
+            (c) =>
+              `<option value="${c}" ${
+                arrival === c ? "selected" : ""
+              }>${c}</option>`
+          )
+          .join("")}
+      </select>
+    </div>
 
-      <div class="filter-card">
-        <label for="ticketCount">ბილეთების რაოდენობა</label>
-        <input type="number" id="ticketCount" name="ticketCount" min="1" value="${
-          ticketCount || 1
-        }">
-      </div>
+    <div class="filter-card">
+      <label for="ticketCount">ბილეთების რაოდენობა</label>
+      <input type="number" id="ticketCount" name="ticketCount" min="1" value="${
+        ticketCount || 1
+      }">
+    </div>
 
-      <button type="submit">ძებნა</button>
-    </form>
-  `;
-
+    <button type="submit">ძებნა</button>
+  </form>
+`;
 
   // საიდან - სად / ერთიდაიგივე მიმართულების ამოშლა
   // ---------------------------
@@ -142,7 +143,6 @@ function displayResults(trains) {
 
   departureSelect.addEventListener("change", updateArrivalOptions);
   updateArrivalOptions();
-
 
   // ფორმა
   // ---------------------------
@@ -209,6 +209,10 @@ function displayResults(trains) {
       numberSpan.classList.add("train-number");
       numberSpan.textContent = `Train #${train.number}`;
 
+      const trainName = document.createElement("span");
+      trainName.classList.add("train-name");
+      trainName.textContent = train.name;
+
       const fromSpan = document.createElement("span");
       fromSpan.classList.add("train-from");
       fromSpan.textContent = train.from;
@@ -229,17 +233,45 @@ function displayResults(trains) {
       departureSpan.classList.add("train-departure");
       departureSpan.textContent = train.departure || "not selected";
 
+      const arriveSpan = document.createElement("span");
+      arriveSpan.classList.add("train-arrive");
+      arriveSpan.textContent = train.arrive;
+
+      const buyBTN = document.createElement("button");
+      buyBTN.textContent = "ბილეთის შეძენა";
+      buyBTN.classList.add("btn", "buyBTN");
+
+      // info.html ში პარამეტრების გადატანა ლინკით
+      buyBTN.addEventListener("click", () => {
+        const params = new URLSearchParams({
+          number: train.number,
+          name: train.name,
+          from: train.from,
+          to: train.to,
+          date: formattedDate,
+          weekday: weekDayName,
+          departure: train.departure,
+          arrive: train.arrive,
+           ticketCount: ticketCount || 1 ,
+           trainID: train.id
+        });
+
+        window.location.href = "info.html?" + params.toString();
+      });
+
       trainElement.append(
         numberSpan,
+        trainName,
         fromSpan,
         toSpan,
         dateSpan,
         weekDaySpan,
-        departureSpan
+        departureSpan,
+        arriveSpan,
+        buyBTN
       );
       resultsDiv.appendChild(trainElement);
     });
-
 
     // "Show More" ღილაკი
     // ---------------------------
@@ -248,6 +280,7 @@ function displayResults(trains) {
 
     const loadMoreButton = document.createElement("button");
     loadMoreButton.id = "loadMoreBtn";
+    loadMoreButton.classList.add("btn");
     loadMoreButton.textContent = "Show More";
 
     loadMoreButton.onclick = () => {
@@ -255,6 +288,7 @@ function displayResults(trains) {
         displayedCount += increment;
         displayResults(trainsData); // მეტის ჩვენება
       } else {
+        loadMoreButton.style.cursor = "auto";
         loadMoreButton.style.border = "2px solid red";
         loadMoreButton.style.color = "red";
         loadMoreButton.disabled = true;
