@@ -70,50 +70,28 @@ function displayResults(trains) {
   <form id="filter-form">
     <div class="filter-card">
       <label for="date">თარიღი</label>
-      <input type="date" id="date" name="date" value="${
-        date || ""
-      }" min="${todays}">
+      <input type="date" id="date" name="date" value="${date || ""}" min="${todays}">
     </div>
 
     <div class="filter-card">
       <label for="departure">საიდან</label>
       <select id="departure" name="departure">
-        <option value="" disabled ${
-          !departure ? "selected" : ""
-        }>აირჩიეთ სადგური</option>
-        ${cities
-          .map(
-            (c) =>
-              `<option value="${c}" ${
-                departure === c ? "selected" : ""
-              }>${c}</option>`
-          )
-          .join("")}
+        <option value="" disabled ${!departure ? "selected" : ""}>აირჩიეთ სადგური</option>
+        ${cities.map((c) => `<option value="${c}" ${departure === c ? "selected" : ""}>${c}</option>`).join("")}
       </select>
     </div>
 
     <div class="filter-card">
       <label for="arrival">სად</label>
       <select id="arrival" name="arrival">
-        <option value="" disabled ${
-          !arrival ? "selected" : ""
-        }>აირჩიეთ სადგური</option>
-        ${cities
-          .map(
-            (c) =>
-              `<option value="${c}" ${
-                arrival === c ? "selected" : ""
-              }>${c}</option>`
-          )
-          .join("")}
+        <option value="" disabled ${!arrival ? "selected" : ""}>აირჩიეთ სადგური</option>
+        ${cities.map((c) => `<option value="${c}" ${arrival === c ? "selected" : ""}>${c}</option>`).join("")}
       </select>
     </div>
 
     <div class="filter-card">
       <label for="ticketCount">ბილეთების რაოდენობა</label>
-      <input type="number" id="ticketCount" name="ticketCount" min="1" value="${
-        ticketCount || 1
-      }">
+      <input type="number" id="ticketCount" name="ticketCount" min="1" value="${ticketCount || 1}">
     </div>
 
     <button type="submit">ძებნა</button>
@@ -132,12 +110,7 @@ function displayResults(trains) {
       `<option value="" disabled selected>აირჩიეთ სადგური</option>` +
       cities
         .filter((c) => c !== selectedDeparture)
-        .map(
-          (c) =>
-            `<option value="${c}" ${
-              arrival === c ? "selected" : ""
-            }>${c}</option>`
-        )
+        .map((c) => `<option value="${c}" ${arrival === c ? "selected" : ""}>${c}</option>`)
         .join("");
   }
 
@@ -165,16 +138,25 @@ function displayResults(trains) {
   });
 
   // ---------------------------
-  const today = new Date();
-  const formattedDate = `${String(today.getDate()).padStart(2, "0")}-${String(
-    today.getMonth() + 1
-  ).padStart(2, "0")}-${today.getFullYear()}`;
-  const weekDayName = getDayName(today);
+  let selectedDate;
+
+  if (date) {
+    // ურლ იდან წამოღება ქარდებში დროის
+    selectedDate = new Date(date);
+  } else {
+    // Fallback დღევანდელდღეზე
+    selectedDate = new Date();
+  }
+
+  const formattedDate = `${String(selectedDate.getDate()).padStart(2, "0")}-${String(
+    selectedDate.getMonth() + 1
+  ).padStart(2, "0")}-${selectedDate.getFullYear()}`;
+
+  const weekDayName = getDayName(selectedDate);
 
   // გაფილტრვა მატარებლების საიდა/სად.
   const filteredTrains = trains.filter((t) => {
-    const matchesDeparture =
-      !departure || (t.from && t.from.trim() === departure.trim());
+    const matchesDeparture = !departure || (t.from && t.from.trim() === departure.trim());
     const matchesArrival = !arrival || (t.to && t.to.trim() === arrival.trim());
     return matchesDeparture && matchesArrival;
   });
@@ -185,9 +167,7 @@ function displayResults(trains) {
   const displayedTrainKeys = new Set();
   const trainsToShow = filteredTrains
     .filter((t) => {
-      const key = `${t.number}-${t.from}-${t.to}-${
-        t.departure || "not selected"
-      }`;
+      const key = `${t.number}-${t.from}-${t.to}-${t.departure || "not selected"}`;
       if (!displayedTrainKeys.has(key)) {
         displayedTrainKeys.add(key);
         return true;
@@ -252,8 +232,8 @@ function displayResults(trains) {
           weekday: weekDayName,
           departure: train.departure,
           arrive: train.arrive,
-           ticketCount: ticketCount || 1 ,
-           trainID: train.id
+          ticketCount: ticketCount || 1,
+          trainID: train.id,
         });
 
         window.location.href = "info.html?" + params.toString();
@@ -297,23 +277,14 @@ function displayResults(trains) {
 
     resultsDiv.appendChild(loadMoreButton);
   } else {
-    resultsDiv.innerHTML =
-      "<p>ამ პარამეტრებით არცერთი მატარებელი არ მიემგზავრება.</p>";
+    resultsDiv.innerHTML = "<p>ამ პარამეტრებით არცერთი მატარებელი არ მიემგზავრება.</p>";
   }
 }
 
 //კვირის დღეები ქართულად
 // ---------------------------
 function getDayName(date) {
-  const daysInGeorgian = [
-    "კვირა",
-    "ორშაბათი",
-    "სამშაბათი",
-    "ოთხშაბათი",
-    "ხუთშაბათი",
-    "პარასკევი",
-    "შაბათი",
-  ];
+  const daysInGeorgian = ["კვირა", "ორშაბათი", "სამშაბათი", "ოთხშაბათი", "ხუთშაბათი", "პარასკევი", "შაბათი"];
   return daysInGeorgian[date.getDay()];
 }
 

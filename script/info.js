@@ -79,12 +79,15 @@ for (let i = 0; i < trainData.ticketCount; i++) {
   const div = document.createElement("div");
   div.className = "ticket";
   div.innerHTML = `
-    <h3>Ticket ${i + 1}</h3>
-    <input type="text" placeholder="სახელი" class="ticket-name" required>
-    <input type="text" placeholder="გვარი" class="ticket-surname" required>
-    <input type="text" placeholder="პირადობის ნომერი ID" class="ticket-id" required>
-    <button class="seat-select-btn btn">აირჩიეთ ადგილი</button>
+    <h3>ბილეთი ${i + 1}</h3>
+    <input type="text" placeholder="სახელი" class="ticket-name" required name="fName">
+    <input type="text" placeholder="გვარი" class="ticket-surname" required name="lName">
+    <input type="text" placeholder="პირადობის ნომერი ID" class="ticket-id" required name="pId">
+    <button class="seat-select-btn btn" type="button">აირჩიეთ ადგილი</button> 
+    <div class="seat-num">
+    <img src="../pictures/chair.svg" >
     <span class="selected-seat"></span>
+    </div>
   `;
   ticketsContainer.appendChild(div);
 
@@ -93,14 +96,18 @@ for (let i = 0; i < trainData.ticketCount; i++) {
     surnameInput: div.querySelector(".ticket-surname"),
     idInput: div.querySelector(".ticket-id"),
     seatSpan: div.querySelector(".selected-seat"),
+    selectedSeatId: null,
   });
 }
 
 console.log("ბილეთები სულ:", tickets);
 
 // ------------------ ადგილის მოდალი ------------------
+let currentTicketIndex = null;
+
 document.querySelectorAll(".seat-select-btn").forEach((btn, idx) => {
   btn.addEventListener("click", () => {
+    currentTicketIndex = idx;
     currentSeatSpan = tickets[idx].seatSpan;
     modal.style.display = "flex";
     console.log(`ადიგილის მოდალი გაიხსნა ბილეთი N: ${idx + 1}`);
@@ -125,11 +132,15 @@ function updateSummary() {
     totalPrice += seatPrice;
 
     const li = document.createElement("li");
-    li.textContent = `${t.nameInput.value || "-"} ${t.surnameInput.value || "-"} - ${t.seatSpan.textContent || "-"}`;
+    li.textContent = `${t.nameInput.value || "-"} ${t.surnameInput.value || "-"} - ${
+      t.seatSpan.textContent || "-"
+    } - ${seatPrice.toFixed(2)}₾`;
     passengersSummary.appendChild(li);
   });
 
   summaryTotal.textContent = totalPrice.toFixed(2);
+  summaryEmail.textContent = document.getElementById("email").value || "-";
+  summaryTicketCount.textContent = trainData.ticketCount;
   console.log("სულ:", totalPrice.toFixed(2)); // 12,50 მაგ...
 }
 
@@ -148,24 +159,56 @@ document.getElementById("checkout-btn").addEventListener("click", () => {
     return;
   }
 
-  const ticketData = tickets.map((t) => ({
+  // ტელეფონის ნომ
+  const phone = document.getElementById("phone").value;
+
+  // persons მასივი
+  const persons = tickets.map((t, idx) => ({
+    id: null,
+    ticketId: null,
+    seat: {
+      number: t.seatSpan.textContent || null,
+      price: parseFloat(t.seatSpan.dataset.price) || 0,
+      seatId: t.selectedSeatId,
+      vagonId: t.vagonId || null,
+      isOccupied: true,
+    },
     name: t.nameInput.value,
+    payoutCompleted: false,
     surname: t.surnameInput.value,
-    personalId: t.idInput.value,
-    seat: t.seatSpan.textContent,
-    price: parseFloat(t.seatSpan.dataset.price) || 0,
+    idNumber: t.idInput.value,
   }));
 
-  const totalPrice = ticketData.reduce((sum, t) => sum + t.price, 0);
+  const totalPrice = persons.reduce((sum, p) => sum + p.seat.price, 0);
 
   const bookingData = {
-    contactEmail: email,
-    contactPhone: document.getElementById("phone").value,
-    tickets: ticketData,
-    total: totalPrice,
+    confirmed: false,
+    date: trainData.date, //
+    email, //
+    id: null,
+    persons,
+    phone: phone || null, //
+    ticketPrice: totalPrice,
+    train: {
+      arrive: trainData.arrive,
+      date: trainData.weekday,
+      departure: trainData.departure,
+      departureId: trainData.departureId || null,
+      from: trainData.from,
+      id: trainData.trainID,
+      name: trainData.name,
+      number: trainData.number,
+      to: trainData.to,
+      vagons: null,
+    },
+    trainID: trainData.trainID, //
   };
 
   console.log("საბოლოო ინფორმაცია:", bookingData);
+
+  // encode and redirect if needed
+  const dataStr = encodeURIComponent(JSON.stringify(bookingData));
+  window.location.href = `../pages/payment.html?bookingData=${dataStr}`;
 });
 
 updateSummary();
@@ -236,9 +279,19 @@ async function loadApiData() {
               return;
             }
 
+            if (currentTicketIndex !== null && tickets[currentTicketIndex].selectedSeatId) {
+              selectedSeats.delete(tickets[currentTicketIndex].selectedSeatId);
+            }
+
             if (currentSeatSpan) {
-              currentSeatSpan.textContent = `ადგილი N: ${seat.number} - ${seat.price}₾`;
+              currentSeatSpan.textContent = seat.number;
               currentSeatSpan.dataset.price = seat.price;
+            }
+
+            //  seatId ჯს ის ობიექტში
+            if (currentTicketIndex !== null) {
+              tickets[currentTicketIndex].selectedSeatId = seat.seatId;
+              tickets[currentTicketIndex].vagonId = vagon.id;
             }
 
             selectedSeats.add(seat.seatId);
@@ -264,3 +317,21 @@ async function loadApiData() {
 }
 
 loadApiData();
+
+//საიდბარი
+const btn = document.getElementById("toggleBtn");
+const sidebar = document.getElementById("sidebar");
+
+btn.addEventListener("click", () => {
+  sidebar.classList.toggle("slide-in");
+  // ისრის ღილაკი 900 პიქსელის ქვემოთ საიდბარისთვის
+  if (sidebar.classList.contains("slide-in")) {
+    btn.innerHTML = "&gt;"; // sidebar open
+  } else {
+    btn.innerHTML = "&lt;"; // sidebar closed
+  }
+});
+"click",
+  () => {
+    sidebar.classList.toggle("slide-in");
+  };

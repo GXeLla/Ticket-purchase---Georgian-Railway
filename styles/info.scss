@@ -2,4 +2,443 @@
 @use "variables" as *;
 @use "mixins" as *;
 
+.container {
+  display: flex;
+  min-height: 100vh;
+}
 
+.form-section {
+  flex: 2;
+  padding: 20px;
+}
+
+.contact-form input {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.tickets-form .ticket {
+  margin-bottom: 15px;
+  padding: 10px;
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  input {
+    margin: 1px;
+  }
+  button {
+    align-self: flex-end;
+  }
+}
+
+.sidebar {
+  flex: 1;
+  background: #fff;
+  padding: 20px;
+  border-left: 1px solid #ccc;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.passengers-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-box {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  min-width: 250px;
+
+  .wagon-select {
+    width: 100%;
+    max-width: 1000px;
+    height: 150px;
+
+    #wagon-container {
+      display: flex;
+      //   flex: 3;
+
+      .vagon-item {
+        position: relative;
+        cursor: pointer;
+        // height: 50px;
+        flex: 1;
+
+        h4 {
+          position: absolute;
+          color: $secondaryColor;
+          top: -13px;
+          left: 50%;
+          transform: translate(-50%);
+        }
+        img {
+          height: 100%;
+          width: 100%;
+          height: 125px;
+          //   flex: 1;
+        }
+      }
+    }
+    img {
+      aspect-ratio: 1.6;
+      height: 125px;
+      flex: 1;
+    }
+  }
+}
+
+.seats-selection {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  width: 80%;
+  row-gap: 10px;
+  h3 {
+    position: absolute;
+    top: 100px;
+    color: white;
+  }
+  & > * {
+    width: calc(10% - 2.5px); /* 10 items per row, subtract half gap */
+    margin-right: 0; /* default no gap */
+    margin-bottom: 5px; /* vertical spacing */
+  }
+
+  & > *:nth-child(2n) {
+    margin-right: 15px; /* gap after every 2 items */
+    gap: 15px;
+  }
+}
+
+.seats-selection button {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  border: 1px solid #666;
+  cursor: pointer;
+}
+.wagon-select {
+  display: flex;
+}
+.form-section {
+  position: relative;
+  #tickets-container {
+    overflow-y: auto;
+    height: calc(235px * 3);
+    max-height: 690px;
+    position: relative;
+    top: 0;
+    left: 2%;
+    width: calc(100% - 30vw);
+
+    // custom scrollbar
+
+    /* Custom Scrollbar */
+    &::-webkit-scrollbar {
+      width: 20px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #eeeeee5e;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $secondaryColor;
+      border-radius: 10px;
+
+      /* fake smaller height */
+      border-top: 30px solid transparent;
+      border-bottom: 30px solid transparent;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: $secondaryTransperent;
+      opacity: 0.85;
+    }
+
+    scrollbar-width: auto;
+    scrollbar-color: $secondaryColor #eeeeee5e; /* Firefox */
+
+    .ticket {
+      width: 98%;
+
+      .seat-num {
+        pointer-events: none;
+        width: 30px;
+        display: flex;
+        position: absolute;
+        bottom: 7%;
+        left: 43px;
+        height: 20px;
+        span::before {
+          content: "-";
+          width: 20px;
+          height: 20px;
+          margin: 5px;
+        }
+      }
+    }
+
+    h2 {
+      text-align: center;
+      margin: 5px;
+    }
+  }
+  .toggle-btn {
+    z-index: 998;
+    position: relative;
+    width: calc(100% + 50px + 67px);
+    top: 20px;
+    right: 67px;
+    background: #ffaf01;
+    padding: 14px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    @media (min-width: 901px) {
+      display: none;
+    }
+  }
+  .contact-form {
+    width: calc(100% - 28vw);
+    @media (max-width: 900px) {
+      width: 100%;
+      h2 {
+        text-align: center;
+      }
+    }
+  }
+  .sidebar {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: calc(100% - 72vw - 20px);
+    min-height: 50vh;
+    max-height: 750px;
+
+    position: absolute;
+    right: 2%;
+    top: 7%;
+
+    border-radius: 8px;
+    background: transparent;
+    box-shadow: 5px 5px 20px rgba(120, 160, 200, 0.5);
+
+    @media (max-width: 900px) {
+      background: linear-gradient(to top, #e0f4fe, #cbe4f3, #e2f1e4, #d1d9d1);
+      width: 85vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      right: -85vw;
+      &.slide-in {
+        right: 0;
+      }
+    }
+
+    h2 {
+      text-align: center;
+      color: $primaryColor;
+    }
+
+    ul {
+      overflow-y: auto;
+      max-height: 500px;
+
+      /* Custom Scrollbar */
+      &::-webkit-scrollbar {
+        width: 20px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #eeeeee5e;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $secondaryTransperent;
+        border-radius: 10px;
+        opacity: 0.45;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: $secondaryTransperent;
+        opacity: 0.45;
+      }
+
+      scrollbar-width: thin;
+      scrollbar-color: $secondaryColor #eeeeee5e; /* Firefox */
+    }
+
+    ul li {
+      width: 100%;
+      letter-spacing: 0.07em;
+      padding: 5px;
+      border-bottom: 2px solid transparent;
+      border-image: repeating-linear-gradient(
+          to right,
+          #666 0 80px,
+          /* dot size */ transparent 250px 125px /* spacing between dots */
+        )
+        1 round;
+    }
+
+    #summary-email {
+      display: block;
+      width: 100%;
+      overflow: auto;
+
+      &::-webkit-scrollbar {
+        width: 20px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #eeeeee5e;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $secondaryColor;
+        border-radius: 10px;
+
+        /* fake smaller height */
+        border-top: 30px solid transparent;
+        border-bottom: 30px solid transparent;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: $secondaryTransperent;
+        opacity: 0.85;
+      }
+
+      scrollbar-width: auto;
+      scrollbar-color: $secondaryColor #eeeeee5e; /* Firefox */
+    }
+  }
+
+  p,
+  button,
+  h2,
+  li {
+    padding: 5px;
+    color: $primaryColor;
+  }
+}
+
+header {
+  max-height: 200px;
+  min-height: 80px;
+  background-color: $secondaryTransperent;
+  align-content: center;
+  position: relative;
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+  #train-info {
+    height: 90%;
+    padding-right: 15px;
+    // width: 70%;
+    color: #333333;
+    letter-spacing: 0.05em;
+    font-weight: 900;
+    @include flexCenter;
+    justify-content: space-around;
+    align-items: self-start;
+
+    #train-number {
+      position: absolute;
+      left: 2%;
+      top: 2%;
+    }
+    #train-name {
+      position: absolute;
+      left: 10%;
+      top: 22%;
+      @media (max-width: 1050px) {
+        left: 65px;
+      }
+      @media (max-width: 768px) {
+        left: 31px;
+      }
+    }
+    #train-date,
+    #train-weekday {
+      position: relative;
+      left: -3%;
+    }
+    #train-weekday {
+      @media (max-width: 1050px) {
+        top: 38px;
+      }
+      @media (max-width: 768px) {
+        position: absolute;
+        left: 110px;
+        top: 52px;
+      }
+    }
+    #train-date {
+      left: 11.5%;
+      top: 22px;
+      @media (max-width: 1050px) {
+        left: 98px;
+      }
+      @media (max-width: 768px) {
+        position: absolute;
+        top: 36px;
+        left: 79px;
+      }
+    }
+    .container-to {
+      position: relative;
+      left: 29%;
+      @media (max-width: 768px) {
+        left: 59%;
+      }
+      // @media (max-width: 468px) {
+      //   left: 222px;
+      // }
+    }
+  }
+}
+
+.flex {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  @media (max-width: 768px) {
+    position: relative;
+    left: 28px;
+  }
+  @media (max-width: 500px) {
+    font-size: 10px;
+  }
+
+  .ticket-pic {
+    width: 70px;
+    border-radius: 7px;
+    @media (max-width: 700px) {
+      width: 40px;
+    }
+  }
+}

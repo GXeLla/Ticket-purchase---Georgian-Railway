@@ -1,0 +1,73 @@
+body {
+  font-family: "Arial", sans-serif;
+  background: #f5f5f5;
+  margin: 0;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+  gap: 40px;
+  max-width: 1100px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 14px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  width: 350px;
+}
+
+.card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.card h3 {
+  margin-top: 20px;
+}
+
+#payment-tickets {
+  padding-left: 20px;
+}
+
+.payment-box input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.checkout-btn {
+  width: 100%;
+  padding: 14px;
+  background: #4caf50;
+  color: white;
+  font-size: 17px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.checkout-btn:hover {
+  background: #43a047;
+}/*# sourceMappingURL=payment.css.map */

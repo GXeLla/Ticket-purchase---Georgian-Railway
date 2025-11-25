@@ -5,83 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Train Booking</title>
     <link rel="stylesheet" href="../styles/info.css" />
-    <style>
-      .container {
-        display: flex;
-        min-height: 100vh;
-      }
-
-      .form-section {
-        flex: 2;
-        padding: 20px;
-      }
-
-      .contact-form input {
-        display: block;
-        margin: 10px 0;
-        padding: 8px;
-        width: 100%;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-      }
-
-      .tickets-form .ticket {
-        margin-bottom: 15px;
-        padding: 10px;
-        background: #fff;
-        border-radius: 8px;
-        border: 1px solid #ddd;
-      }
-
-      .sidebar {
-        flex: 1;
-        background: #fff;
-        padding: 20px;
-        border-left: 1px solid #ccc;
-        box-shadow: -2px 0 5px rgba(0, 0, 0, 0.05);
-      }
-
-      .passengers-list {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 10px 0;
-      }
-
-      .modal {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
-        justify-content: center;
-        align-items: center;
-      }
-
-      .modal-box {
-        background: #fff;
-        padding: 20px;
-        border-radius: 10px;
-        min-width: 250px;
-      }
-
-      .seats-selection {
-        display: grid;
-        grid-template-columns: repeat(14, 50px);
-        gap: 10px;
-      }
-
-      .seats-selection button {
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #666;
-        cursor: pointer;
-      }
-  .wagon-select{
-    display: flex;
-  }
-    </style>
   </head>
   <body>
     <div class="loading-container" id="loading">
@@ -110,7 +33,7 @@
         <span id="train-name"></span>
         <span id="train-date"></span>
         <span id="train-weekday"></span>
-        <div class="flex">
+        <div class="flex container-to">
           <span id="train-to"></span>
           <span id="train-arrive"></span>
         </div>
@@ -119,32 +42,32 @@
           <span id="train-departure"></span>
         </div>
         <div class="flex">
-          <span>IMG</span>
+          <img src="../pictures/Ticket.png" class="ticket-pic" />
           <span id="train-ticketCount"></span>
         </div>
       </div>
     </header>
     <main class="container">
       <section class="form-section">
-        <div class="contact-form">
+        <form class="contact-form">
           <h2>საკონტაქტო ინფორმაცია</h2>
           <input type="email" id="email" placeholder="Email (აუცილებელია)" required />
           <input type="text" id="phone" placeholder="ტელეფონის ნომერი" />
-        </div>
+        </form>
 
-        <div id="tickets-container" class="tickets-form">
+        <form id="tickets-container" class="tickets-form">
           <h2>ბილეთები</h2>
-        </div>
+        </form>
+        <aside class="sidebar" id="sidebar">
+          <h2>ინვოისი</h2>
+          <ul id="passengers-summary" class="passengers-list"></ul>
+          <p>საკონტაქტო Email: <span id="summary-email">-</span></p>
+          <p>ბილეთების რაოდენობა: <span id="summary-ticket-count">0</span></p>
+          <p>სულ: <span id="summary-total">0.00</span>₾</p>
+          <button id="checkout-btn">Checkout</button>
+          <div class="toggle-btn" id="toggleBtn">&lt;</div>
+        </aside>
       </section>
-
-      <aside class="sidebar">
-        <h2>ინვოისი</h2>
-        <ul id="passengers-summary" class="passengers-list"></ul>
-        <p>საკონტაქტო Email: <span id="summary-email">-</span></p>
-        <p>ბილეთების რაოდენობა: <span id="summary-ticket-count">0</span></p>
-        <p>სულ: <span id="summary-total">0.00</span>₾</p>
-        <button id="checkout-btn">Checkout</button>
-      </aside>
     </main>
 
     <!-- მოდალი ადგილის ასარჩევათ  -->
