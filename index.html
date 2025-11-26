@@ -15,7 +15,7 @@
           <h1>Georgian Trains</h1>
         </a>
         <ul>
-          <li><a href="./pages/check.html">ბილეთების შემოწმება</a></li>
+          <li><a href="./pages/check.html" class="glow click-me">ბილეთების შემოწმება</a></li>
           <li id="main-container-lang-changer">
             <div onclick="toggleDropdown('languageChanger-dropdown')">
               <img src="./pictures/languge.svg" alt="" id="language-icon" />
@@ -25,12 +25,20 @@
               <div class="option" onclick="setLanguage('Ka')">ქართული</div>
             </div>
           </li>
-          <li><a href="#">Euro</a></li>
+          <li>
+            <div>
+              <img src="./pictures/eur.svg" id="currency_icon" />
+            </div>
+          </li>
         </ul>
       </nav>
 
       <!--  -->
       <img src="./pictures/background_2023_landscape_2400_1250_compressed.png" alt="" id="Hero-bg" />
+      <div class="container-welcome">
+        <h2 id="welcome"></h2>
+        <span class="cursor" id="cursor">|</span>
+      </div>
 
       <!--  -->
       <form class="main-container-form">
@@ -89,7 +97,7 @@
           </svg>
           <span id="tkt-counter">X<span id="tkt-count"></span></span>
         </div>
-        <button type="submit" class="btn" onclick="submitForm()">
+        <button type="submit" class="btn" id="submit-btn-main" onclick="submitForm()">
           <span class="icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path
@@ -101,6 +109,14 @@
         </button>
       </form>
     </header>
+    <main>
+      <section id="registration-section">
+        <div class="card"></div>
+        <div class="img">
+          <img src="./pictures/background_2023_vehicle_overlay_compressed.png" class="edit-me"/>
+        </div>
+      </section>
+    </main>
     <!-- bycicle man dog svg  -->
     <!-- <svg
         width="100%"

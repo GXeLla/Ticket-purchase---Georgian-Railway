@@ -20,13 +20,34 @@ header {
 
   .logo {
     @include flexCenter;
-    min-width: 290px;
+    min-width: 303px;
   }
 
   ul {
+    @media (max-width: 710px) {
+      flex-direction: column;
+      width: 260px;
+      min-width: 260px;
+      align-items: end;
+      #language-icon,
+      #currency_icon {
+        margin-right: 30px;
+      }
+    }
+    @media (max-width: 567px) {
+      position: absolute;
+      left: 0;
+      top: 60px;
+      align-items: start;
+      #language-icon,
+      #currency_icon {
+        margin: 0 0 0 30px;
+      }
+    }
+
     @include flexCenter;
     justify-content: space-evenly;
-    min-width: 250px;
+    min-width: 400px;
     li {
       list-style-type: none;
     }
@@ -88,15 +109,16 @@ header {
       top: 30px;
       opacity: 0;
       pointer-events: none;
-      display: none;
+      // display: none;
       z-index: 789;
+      color-scheme: dark;
     }
 
     #dateImage {
       position: absolute;
       width: 50px;
       height: 50px;
-      pointer-events: none
+      pointer-events: none;
     }
   }
 
@@ -225,8 +247,28 @@ header {
       text-transform: uppercase;
     }
   }
+
+  @media (max-width: 768px) {
+    #openPicker {
+      position: absolute;
+      top: calc(50vh + 25px);
+      height: 72px;
+      left: 5vw;
+      box-shadow: 2px 20px 50px #9cbd8f;
+    }
+    #counter-container {
+      position: absolute;
+      top: calc(50vh + 25px);
+      right: 5vw;
+      box-shadow: 2px 20px 50px #9cbd8f;
+    }
+    #submit-btn-main {
+      position: absolute;
+      top: calc(50vh + 25px);
+    }
+  }
   .btn {
-    height: 100%;
+    height: 72px;
     width: 25%;
     max-width: 250px;
     min-width: 150px;
@@ -284,5 +326,96 @@ header {
     &::before {
       bottom: 40px;
     }
+  }
+}
+
+#currency_icon {
+  position: relative;
+  top: 3px;
+  scale: 1.2;
+}
+#language-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.glow {
+  position: relative;
+  display: inline-block;
+  font-size: 1.2em; // Maintain font size
+  color: #003d4d; // Darker text color for contrast
+  text-decoration: none;
+  background: #e0f4fe; // Base color specified
+  padding: 15px 30px; // Sufficient padding
+  border-radius: 10px; // Rounded corners
+  transition: box-shadow 0.3s ease, transform 0.3s ease; // Animation only for box-shadow
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 10px;
+    background: linear-gradient(145deg, rgba(0, 200, 255, 0.2), rgba(0, 0, 0, 0.2));
+    transition: opacity 0.3s ease;
+    z-index: -1; // Behind the main text
+    filter: blur(15px); // Blur for soft glow effect
+    opacity: 0;
+  }
+
+  &:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4); // Soft shadow on hover
+    &::before {
+      opacity: 1; // Show the glow on hover
+    }
+  }
+
+  &:active {
+    transform: translateY(1px); // Slight dim down effect on click without hopping
+  }
+}
+
+.container-welcome {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 60px;
+  @media (max-height: 777px) {
+    bottom: 10px;
+  }
+}
+
+h2,
+h1 {
+  @include storyScript(32px);
+}
+
+#cursor {
+  font-size: 26px;
+  color: #333;
+  animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+#registration-section {
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  .card {
+    flex: 1;
+    height: 100%;
+  }
+  .edit-me {
+    width: 50vw;
+    height: 100%;
+    pointer-events: none;
   }
 }

@@ -166,3 +166,28 @@ function submitForm() {
 
 // ფუნქცია ამუშავდეს მხოლოდ საბმით ტაიპ ბატონზე
 document.querySelector("button[type='submit']").addEventListener("click", submitForm);
+
+// script.js
+const welcomeText = document.getElementById("welcome");
+const cursor = document.getElementById("cursor");
+const text = "Welcome...";
+let index = 0;
+const typingSpeed = 450; //
+
+function type() {
+  if (index < text.length) {
+    welcomeText.textContent += text.charAt(index);
+    index++;
+    setTimeout(type, typingSpeed);
+  } else {
+   
+    setTimeout(() => {
+      cursor.style.display = "none"; //  6 s
+    }, 6000); 
+    setTimeout(() => {
+      welcomeText.style.display = "none"; // 10 s
+    }, 10000); 
+  }
+}
+
+type(); 

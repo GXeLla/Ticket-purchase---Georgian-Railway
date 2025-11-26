@@ -26,7 +26,7 @@ body {
 
 h1 {
   font-size: 32px;
-  color: rgb(2.6964285714, 165.380952381, 223.8035714286);
+  color: rgb(2.6964285714, 165.380952381, 223.8035714286) !important;
   letter-spacing: 0.05em;
 }
 
@@ -233,10 +233,33 @@ input:hover {
   border-radius: 10px;
   min-width: 250px;
 }
+@media (max-width: 900px) {
+  .modal-box {
+    width: 100%;
+  }
+}
 .modal-box .wagon-select {
   width: 100%;
   max-width: 1000px;
   height: 150px;
+}
+@media (max-width: 900px) {
+  .modal-box .wagon-select img {
+    height: 80px !important;
+  }
+  .modal-box .wagon-select #wagon-container h4 {
+    font-size: 12px;
+    width: 100%;
+  }
+}
+@media (max-width: 570px) {
+  .modal-box .wagon-select img {
+    height: 50px !important;
+  }
+  .modal-box .wagon-select #wagon-container h4 {
+    font-size: 10px;
+    width: 100%;
+  }
 }
 .modal-box .wagon-select #wagon-container {
   display: flex;
@@ -266,29 +289,137 @@ input:hover {
 
 .seats-selection {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 0fr);
   width: 80%;
-  row-gap: 10px;
+  justify-content: center;
+  justify-self: center;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+  position: relative;
+  background-color: #ddd;
+}
+@media (max-width: 780px) {
+  .seats-selection {
+    -moz-column-gap: 0;
+         column-gap: 0;
+  }
+}
+@media (max-width: 570px) {
+  .seats-selection {
+    -moz-column-gap: 6px;
+         column-gap: 6px;
+    width: 100%;
+  }
+}
+@media (max-width: 500px) {
+  .seats-selection {
+    -moz-column-gap: 0px;
+         column-gap: 0px;
+  }
 }
 .seats-selection h3 {
   position: absolute;
-  top: 100px;
-  color: white;
+  top: -16%;
+  width: 200px;
+  color: rgb(24, 24, 24);
 }
-.seats-selection > * {
-  width: calc(10% - 2.5px); /* 10 items per row, subtract half gap */
-  margin-right: 0; /* default no gap */
-  margin-bottom: 5px; /* vertical spacing */
+.seats-selection button {
+  height: 40px;
+  width: 40px;
 }
-.seats-selection > *:nth-child(2n) {
-  margin-right: 15px; /* gap after every 2 items */
-  gap: 15px;
+@media (max-width: 440px) {
+  .seats-selection button {
+    height: 62px;
+    width: 34px;
+  }
+}
+.seats-selection button:nth-child(20) {
+  margin-bottom: 40px;
+}
+.seats-selection img {
+  position: absolute;
+}
+.seats-selection .door_l {
+  left: -11%;
+  height: 200px;
+}
+@media (max-width: 950px) {
+  .seats-selection .door_l {
+    left: -12%;
+  }
+}
+@media (max-width: 850px) {
+  .seats-selection .door_l {
+    left: -14%;
+  }
+}
+@media (max-width: 760px) {
+  .seats-selection .door_l {
+    left: -16%;
+  }
+}
+@media (max-width: 666px) {
+  .seats-selection .door_l {
+    left: -18%;
+  }
+}
+@media (max-width: 570px) {
+  .seats-selection .door_l {
+    display: none;
+  }
+}
+.seats-selection .door_r {
+  left: 100%;
+  height: 200px;
+}
+@media (max-width: 570px) {
+  .seats-selection .door_r {
+    display: none;
+  }
+}
+.seats-selection .luggage {
+  width: 75px;
+  height: 200px;
+  left: 2%;
+  opacity: 0.7;
+}
+@media (max-width: 1000px) {
+  .seats-selection .luggage {
+    left: 3%;
+    width: 50px;
+    opacity: 0.4;
+  }
+}
+@media (max-width: 570px) {
+  .seats-selection .luggage {
+    left: 65%;
+    top: -135px;
+    width: 45px;
+    opacity: 1;
+  }
+}
+.seats-selection .wc {
+  width: 100px;
+  height: 200px;
+  left: 87%;
+  opacity: 0.7;
+}
+@media (max-width: 950px) {
+  .seats-selection .wc {
+    width: 70px;
+    opacity: 0.4;
+  }
+}
+@media (max-width: 570px) {
+  .seats-selection .wc {
+    width: 45px;
+    opacity: 1;
+    top: -135px;
+  }
 }
 
 .seats-selection button {
   padding: 10px;
-  width: 100%;
-  height: 100%;
   border-radius: 5px;
   border: 1px solid #666;
   cursor: pointer;
@@ -329,6 +460,11 @@ input:hover {
 .form-section #tickets-container::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 175, 1, 0.8);
   opacity: 0.85;
+}
+@media (max-width: 900px) {
+  .form-section #tickets-container {
+    width: 100%;
+  }
 }
 .form-section #tickets-container .ticket {
   width: 98%;
@@ -585,4 +721,26 @@ header #train-info .container-to {
   .flex .ticket-pic {
     width: 40px;
   }
+}
+
+.seat-button {
+  background-image: url("../pictures/Wagon_Seat.svg");
+  background-repeat: no-repeat;
+  border: none !important;
+  background-color: transparent;
+  background-position: center;
+  background-size: 111% 100%;
+}
+
+.reserved {
+  background-image: url("../pictures/Wagon_Seat_Cancel.svg");
+  cursor: not-allowed !important;
+  filter: invert(14%) sepia(4%) saturate(6000%) hue-rotate(0deg) brightness(90%) contrast(90%);
+  background-position: center;
+  rotate: 180deg;
+}
+
+.active {
+  background-image: url("../pictures/Wagon_Seat_Selected.svg");
+  rotate: 180deg;
 }/*# sourceMappingURL=info.css.map */

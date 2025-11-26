@@ -251,6 +251,17 @@ function displayResults(trains) {
         buyBTN
       );
       resultsDiv.appendChild(trainElement);
+
+      const picsDiv = document.createElement("div");
+      picsDiv.classList.add("pics");
+
+      picsDiv.innerHTML = `
+  <img src="../pictures/AC.svg">
+  <img src="../pictures/cofee.svg">
+  <img src="../pictures/wc.svg">
+`;
+
+      trainElement.appendChild(picsDiv);
     });
 
     // "Show More" ღილაკი

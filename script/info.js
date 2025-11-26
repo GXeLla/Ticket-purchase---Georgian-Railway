@@ -255,6 +255,26 @@ async function loadApiData() {
       vagonDiv.addEventListener("click", () => {
         seatOptions.innerHTML = "<h3>აირჩიეთ ადგილი</h3>";
 
+        const wc = document.createElement("img");
+        wc.src = "../pictures/Wagon_Wc.svg";
+        wc.classList.add("wc");
+        seatOptions.appendChild(wc);
+
+        const doorR = document.createElement("img");
+        doorR.src = "../pictures/Wagon_Door_R.svg";
+        doorR.classList.add("door_r");
+        seatOptions.appendChild(doorR);
+
+        const doorL = document.createElement("img");
+        doorL.src = "../pictures/Wagon_Door_L.svg";
+        doorL.classList.add("door_l");
+        seatOptions.appendChild(doorL);
+
+        const luggage = document.createElement("img");
+        luggage.src = "../pictures/Wagon-Luggage.svg";
+        luggage.classList.add("luggage");
+        seatOptions.appendChild(luggage);
+
         vagon.seats.forEach((seat) => {
           const btn = document.createElement("button");
           btn.textContent = seat.number;
@@ -266,6 +286,18 @@ async function loadApiData() {
             btn.disabled = true;
           }
 
+          const buttons = document.querySelectorAll(".seat-button");
+
+          buttons.forEach((btn) => {
+            btn.addEventListener("click", () => {
+              // First, remove the 'active' class from all buttons (optional)
+              buttons.forEach((b) => b.classList.remove("active"));
+
+              // Add 'active' class to the clicked button
+              btn.classList.add("active");
+            });
+          });
+
           btn.addEventListener("click", (e) => {
             e.stopPropagation();
 
@@ -275,7 +307,40 @@ async function loadApiData() {
             }
 
             if (selectedSeats.has(seat.seatId)) {
-              alert(`ადგილი ${seat.number} სხვა ბილეთშია დაფიქსირებული!`);
+              const popup = document.createElement("div");
+              popup.textContent = `ადგილი ${seat.number} სხვა ბილეთშია დაფიქსირებული!`;
+
+              // style
+              Object.assign(popup.style, {
+                position: "fixed",
+                top: "20px",
+                left: "50%",
+                transform: "translateX(-50%)",
+                background: "rgba(200, 0, 0, 0.85)",
+                color: "white",
+                padding: "10px 20px",
+                borderRadius: "5px",
+                fontWeight: "bold",
+                zIndex: 9999,
+                opacity: 0,
+                transition: "opacity 0.3s ease",
+              });
+
+              // ბოდიში ვამატებთ
+              document.body.appendChild(popup);
+
+              requestAnimationFrame(() => {
+                popup.style.opacity = 1;
+              });
+
+              // აშორებს 2 წამის მერე
+              setTimeout(() => {
+                popup.style.opacity = 0;
+                setTimeout(() => {
+                  popup.remove();
+                }, 300);
+              }, 2000);
+
               return;
             }
 

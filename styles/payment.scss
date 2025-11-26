@@ -1,73 +1,147 @@
-body {
-  font-family: "Arial", sans-serif;
-  background: #f5f5f5;
+/* Mobile-first: stacked, full viewport width */
+* {
+  box-sizing: border-box;
   margin: 0;
-  padding: 40px;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 .container {
   display: flex;
-  gap: 40px;
-  max-width: 1100px;
+  flex-direction: column;
   width: 100%;
+  gap: 20px;
+  align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
 }
 
 .card {
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 14px;
-  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-  width: 350px;
+  background: #fff;
+  width: 95%;
+  min-height: 45vh; /* almost half viewport height */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }
 
 .card h2 {
-  margin-top: 0;
-  margin-bottom: 20px;
-  font-size: 22px;
+  font-size: 20px;
+  margin-bottom: 15px;
 }
 
 .card h3 {
-  margin-top: 20px;
+  font-size: 18px;
+  margin-top: 10px;
 }
 
-#payment-tickets {
-  padding-left: 20px;
+.card p,
+.card ul li {
+  font-size: 16px;
+  margin: 5px 0;
 }
 
 .payment-box input {
   width: 100%;
-  padding: 12px;
-  border: 1px solid #cccccc;
+  padding: 14px;
+  font-size: 16px;
   border-radius: 8px;
-  font-size: 15px;
-}
-
-.form-group {
-  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
 }
 
 .form-row {
   display: flex;
-  justify-content: space-between;
-  gap: 15px;
+  flex-direction: column; /* stacked inputs on mobile */
+  gap: 10px;
+}
+
+#card-date,
+#cvv {
+  width: 100%;
 }
 
 .checkout-btn {
   width: 100%;
-  padding: 14px;
-  background: #4caf50;
+  padding: 16px;
+  background-color: #4caf50;
   color: white;
-  font-size: 17px;
-  border: none;
+  font-size: 18px;
   border-radius: 10px;
+  border: none;
   cursor: pointer;
-  margin-top: 15px;
 }
 
 .checkout-btn:hover {
-  background: #43a047;
+  background-color: #43a047;
+}
+
+/* Medium screens: tablets */
+@media (min-width: 500px) {
+  .card {
+    min-height: 50vh;
+    padding: 25px;
+  }
+
+  .card h2 {
+    font-size: 22px;
+  }
+
+  .card h3 {
+    font-size: 20px;
+  }
+
+  .form-row {
+    flex-direction: row;
+    gap: 15px;
+  }
+
+  #card-date,
+  #cvv {
+    width: 48%;
+  }
+}
+
+/* Large screens: desktops */
+@media (min-width: 900px) {
+  .container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    width: 95%;
+  }
+
+  .card {
+    width: 48%; /* two cards side by side */
+    min-height: 60vh; /* taller on desktop */
+  }
+
+  .card h2 {
+    font-size: 24px;
+  }
+
+  .card h3 {
+    font-size: 22px;
+  }
+
+  .card p,
+  .card ul li {
+    font-size: 18px;
+  }
+
+  .checkout-btn {
+    font-size: 19px;
+    padding: 18px;
+  }
 }

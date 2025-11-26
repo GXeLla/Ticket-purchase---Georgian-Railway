@@ -24,7 +24,7 @@ body {
 
 h1 {
   font-size: 32px;
-  color: darken($color: #03b8f9, $amount: 5%);
+  color: darken($color: #03b8f9, $amount: 5%) !important;
   letter-spacing: 0.05em;
 }
 

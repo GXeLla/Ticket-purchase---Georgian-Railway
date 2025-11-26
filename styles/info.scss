@@ -70,11 +70,36 @@
   padding: 20px;
   border-radius: 10px;
   min-width: 250px;
+  @media (max-width: 900px) {
+    width: 100%;
+  }
 
   .wagon-select {
     width: 100%;
     max-width: 1000px;
     height: 150px;
+    @media (max-width: 900px) {
+      img {
+        height: 80px !important;
+      }
+      #wagon-container {
+        h4 {
+          font-size: 12px;
+          width: 100%;
+        }
+      }
+    }
+    @media (max-width: 570px) {
+      img {
+        height: 50px !important;
+      }
+      #wagon-container {
+        h4 {
+          font-size: 10px;
+          width: 100%;
+        }
+      }
+    }
 
     #wagon-container {
       display: flex;
@@ -111,30 +136,110 @@
 
 .seats-selection {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 0fr);
   width: 80%;
-  row-gap: 10px;
+  justify-content: center;
+  justify-self: center;
+  column-gap: 20px;
+  position: relative;
+  background-color: #ddd;
+
+  @media (max-width: 780px) {
+    column-gap: 0;
+  }
+  @media (max-width: 570px) {
+    column-gap: 6px;
+    width: 100%;
+  }
+  @media (max-width: 500px) {
+    column-gap: 0px;
+  }
   h3 {
     position: absolute;
-    top: 100px;
-    color: white;
+    top: -16%;
+    width: 200px;
+    color: $primaryColor;
   }
-  & > * {
-    width: calc(10% - 2.5px); /* 10 items per row, subtract half gap */
-    margin-right: 0; /* default no gap */
-    margin-bottom: 5px; /* vertical spacing */
+  button {
+    height: 40px;
+    width: 40px;
+
+    @media (max-width: 440px) {
+      height: 62px;
+      width: 34px;
+    }
+  }
+  button:nth-child(20) {
+    margin-bottom: 40px;
   }
 
-  & > *:nth-child(2n) {
-    margin-right: 15px; /* gap after every 2 items */
-    gap: 15px;
+  img {
+    position: absolute;
+  }
+
+  .door_l {
+    left: -11%;
+    height: 200px;
+    @media (max-width: 950px) {
+      left: -12%;
+    }
+    @media (max-width: 850px) {
+      left: -14%;
+    }
+    @media (max-width: 760px) {
+      left: -16%;
+    }
+    @media (max-width: 666px) {
+      left: -18%;
+    }
+    @media (max-width: 570px) {
+      display: none;
+    }
+  }
+  .door_r {
+    left: 100%;
+    height: 200px;
+    @media (max-width: 570px) {
+      display: none;
+    }
+  }
+  .luggage {
+    width: 75px;
+    height: 200px;
+    left: 2%;
+    opacity: 0.7;
+    @media (max-width: 1000px) {
+      left: 3%;
+      width: 50px;
+      opacity: 0.4;
+    }
+    @media (max-width: 570px) {
+      left: 65%;
+      top: -135px;
+      width: 45px;
+      opacity: 1;
+    }
+  }
+
+  .wc {
+    width: 100px;
+    height: 200px;
+    left: 87%;
+    opacity: 0.7;
+    @media (max-width: 950px) {
+      width: 70px;
+      opacity: 0.4;
+    }
+    @media (max-width: 570px) {
+      width: 45px;
+      opacity: 1;
+      top: -135px;
+    }
   }
 }
 
 .seats-selection button {
   padding: 10px;
-  width: 100%;
-  height: 100%;
   border-radius: 5px;
   border: 1px solid #666;
   cursor: pointer;
@@ -180,7 +285,9 @@
 
     scrollbar-width: auto;
     scrollbar-color: $secondaryColor #eeeeee5e; /* Firefox */
-
+    @media (max-width: 900px) {
+      width: 100%;
+    }
     .ticket {
       width: 98%;
 
@@ -441,4 +548,25 @@ header {
       width: 40px;
     }
   }
+}
+
+.seat-button {
+  background-image: url("../pictures/Wagon_Seat.svg");
+  background-repeat: no-repeat;
+  border: none !important;
+  background-color: transparent;
+  background-position: center;
+  background-size: 111% 100%;
+}
+.reserved {
+  background-image: url("../pictures/Wagon_Seat_Cancel.svg");
+  cursor: not-allowed !important;
+  filter: invert(14%) sepia(4%) saturate(6000%) hue-rotate(0deg) brightness(90%) contrast(90%);
+  background-position: center;
+  rotate: 180deg;
+}
+
+.active {
+  background-image: url("../pictures/Wagon_Seat_Selected.svg");
+  rotate: 180deg;
 }
