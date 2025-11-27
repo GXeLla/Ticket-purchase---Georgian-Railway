@@ -18,11 +18,13 @@ const translations = {
     searchTrains: "Search Trains",
     arrivalPlaceholder: "Select Arrival City",
     departurePlaceholder: "Select Departure City",
+    register : "Register Here"
   },
   ka: {
     searchTrains: "რეისების ძიება",
     arrivalPlaceholder: "საიდან მიემგზავრებით",
     departurePlaceholder: "სად მიემგზავრებით",
+    register : "რეგისტრაცია"
   },
 };
 // დროპდაუნები
@@ -89,15 +91,19 @@ function setLanguage(language) {
   const SearchTrainsText = document.getElementById("search-trains-text");
   const arrivalInput = document.getElementById("arrival-selector");
   const departureInput = document.getElementById("departure-selector");
+  const register = document.getElementById("registration-link");
+
 
   if (language === "Eng") {
     SearchTrainsText.textContent = translations.eng.searchTrains;
     arrivalInput.placeholder = translations.eng.arrivalPlaceholder;
     departureInput.placeholder = translations.eng.departurePlaceholder;
+    register.textContent = translations.eng.register;
   } else if (language === "Ka") {
     SearchTrainsText.textContent = translations.ka.searchTrains;
     arrivalInput.placeholder = translations.ka.arrivalPlaceholder;
     departureInput.placeholder = translations.ka.departurePlaceholder;
+    register.textContent = translations.ka.register;
   }
 
   closeAllDropdowns();
@@ -167,7 +173,6 @@ function submitForm() {
 // ფუნქცია ამუშავდეს მხოლოდ საბმით ტაიპ ბატონზე
 document.querySelector("button[type='submit']").addEventListener("click", submitForm);
 
-// script.js
 const welcomeText = document.getElementById("welcome");
 const cursor = document.getElementById("cursor");
 const text = "Welcome...";

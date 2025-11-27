@@ -5,7 +5,7 @@ const ticketContainer = document.getElementById("ticket-container");
 // ფუნქცია დასახელებისთვის + მონაცემები
 function createLine(label, value) {
   const div = document.createElement("div");
-  div.style.marginBottom = "5px";
+  div.style.marginBottom = "15px";
 
   const labelSpan = document.createElement("span");
   labelSpan.textContent = `${label}: `;
@@ -58,18 +58,19 @@ function createTicketCard(ticket) {
 
   // მგზავრების ინფორმაცია
   const passengersSection = document.createElement("div");
+  passengersSection.classList.add("passenger-card");
   passengersSection.style.marginTop = "10px";
   const passengersHeader = document.createElement("div");
   passengersHeader.textContent = "მგზავრები:";
   passengersHeader.style.fontWeight = "bold";
-  passengersHeader.style.marginBottom = "5px";
+  passengersHeader.style.marginBottom = "15px";
   passengersSection.appendChild(passengersHeader);
 
   if (ticket.persons && ticket.persons.length > 0) {
     ticket.persons.forEach((person) => {
       const personDiv = document.createElement("div");
       personDiv.style.padding = "8px";
-      personDiv.style.marginBottom = "5px";
+      personDiv.style.marginBottom = "15px";
       personDiv.style.border = "1px solid #eee";
       personDiv.style.borderRadius = "6px";
       personDiv.style.background = "#f9f9f9";
@@ -88,12 +89,12 @@ function createTicketCard(ticket) {
 
   card.appendChild(passengersSection);
 
-  // ღილაკები footers 
+  // ღილაკები footers
   const footer = document.createElement("div");
   footer.style.marginTop = "15px";
   footer.style.display = "flex";
   footer.style.gap = "10px";
-//წაშლის
+  //წაშლის
   const delBtn = document.createElement("button");
   delBtn.textContent = "ბილეთის წაშლა";
   delBtn.style.background = "#a72828ff";
@@ -102,26 +103,26 @@ function createTicketCard(ticket) {
   delBtn.style.padding = "5px 10px";
   delBtn.style.borderRadius = "5px";
 
-delBtn.onclick = async () => {
-  if (!confirm("ნამდვილად გსურთ ბილეთის გაუქმება?")) return;
+  delBtn.onclick = async () => {
+    if (!confirm("ნამდვილად გსურთ ბილეთის გაუქმება?")) return;
 
-  try {
-    const res = await fetch(`https://railway.stepprojects.ge/api/tickets/cancel/${ticket.id}`, {
-      method: "DELETE"
-    });
+    try {
+      const res = await fetch(`https://railway.stepprojects.ge/api/tickets/cancel/${ticket.id}`, {
+        method: "DELETE",
+      });
 
-    if (!res.ok) {
-      const errText = await res.text();
-      throw new Error(errText || "წაშლა ვერ შესრულდა");
+      if (!res.ok) {
+        const errText = await res.text();
+        throw new Error(errText || "წაშლა ვერ შესრულდა");
+      }
+
+      alert("ბილეთი გააუქმდა");
+      card.remove();
+    } catch (err) {
+      alert("ვერ მოხერხდა წაშლა: " + err.message);
     }
-
-    alert("ბილეთი გააუქმდა");
-    card.remove();
-  } catch (err) {
-    alert("ვერ მოხერხდა წაშლა: " + err.message);
-  }
-};
-// გადადის ქონფირმაიშენ ჰტმლ
+  };
+  // გადადის ქონფირმაიშენ ჰტმლ
   const pdfBtn = document.createElement("button");
   pdfBtn.textContent = "ნახე PDF";
   pdfBtn.style.background = "#17a2b8";
@@ -146,7 +147,7 @@ delBtn.onclick = async () => {
 async function fetchTicket(ticketId) {
   try {
     const res = await fetch(`https://railway.stepprojects.ge/api/tickets/checkstatus/${ticketId}`);
-       if (!res.ok) {
+    if (!res.ok) {
       // დომ შიგნით ანახებს ერრორს
       ticketContainer.innerHTML = `
         <div style="
@@ -161,17 +162,17 @@ async function fetchTicket(ticketId) {
           ბილეთი ვერ მოიძებნა!
         </div>
       `;
-      return; 
+      return;
     }
 
     const ticket = await res.json();
-    console.log(ticket); 
+    console.log(ticket);
 
     ticketContainer.innerHTML = ""; // შლის წინა ქარდებს
     const card = createTicketCard(ticket);
     ticketContainer.appendChild(card);
   } catch (err) {
-        // დომში ერორრ ჰანდლე
+    // დომში ერორრ ჰანდლე
     ticketContainer.innerHTML = `
       <div style="
         padding: 15px;

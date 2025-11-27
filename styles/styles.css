@@ -567,13 +567,109 @@ h1 {
   margin-top: 100px;
   display: flex;
   align-items: center;
+  height: 272px;
+  width: 100%;
+}
+@media (max-height: 812px) and (max-width: 500px) {
+  #registration-section {
+    margin-top: 10px;
+  }
 }
 #registration-section .card {
   flex: 1;
   height: 100%;
+  border: 1px solid #003d4d;
+  border-bottom-right-radius: 17px;
+  border-top-right-radius: 80%;
+  height: 90%;
+  width: 90%;
+  background-color: rgba(255, 242, 219, 0.523);
+}
+@media (max-width: 500px) {
+  #registration-section .card {
+    background-color: transparent;
+    border: none;
+  }
+}
+#registration-section .card .pic {
+  width: 70%;
+  height: 100%;
+  position: relative;
+}
+#registration-section .card .pic .login-register {
+  font-size: 17px;
+  display: flex;
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  text-align: end;
+}
+@media (max-width: 500px) {
+  #registration-section .card .pic .login-register {
+    bottom: 0;
+    left: 65px;
+    height: 75px;
+    top: 80%;
+    width: 160px;
+  }
+  #registration-section .card .pic .login-register a {
+    align-self: center !important;
+  }
+}
+#registration-section .card .pic .login-register:hover svg {
+  fill: rgba(255, 175, 1, 0.8);
+  background-color: rgb(255, 244.2421052632, 225.8);
+}
+#registration-section .card .pic .login-register:hover a {
+  color: #003d4d;
+}
+#registration-section .card .pic .login-register a {
+  align-self: flex-end;
+  text-decoration: underline;
+  color: rgb(24, 24, 24);
+}
+#registration-section .card .pic svg {
+  width: 50px;
+  height: 50px;
+  fill: #003d4d;
+}
+#registration-section .card .pic svg:hover {
+  fill: rgba(255, 175, 1, 0.8);
+  background-color: rgb(255, 244.2421052632, 225.8);
+}
+#registration-section .card .pic img {
+  width: 125px;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  background-color: #003d4d;
+}
+@media (max-width: 500px) {
+  #registration-section .card .pic img {
+    width: 65px;
+  }
 }
 #registration-section .edit-me {
   width: 50vw;
   height: 100%;
   pointer-events: none;
+}
+
+footer {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+footer .pics img {
+  cursor: not-allowed;
+}
+@media (max-width: 500px) {
+  footer .pics {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: -40px;
+  }
 }/*# sourceMappingURL=styles.css.map */
