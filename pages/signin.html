@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Sgin in</title>
+    <link rel="icon" href="../pictures/Logo.png" type="image/x-icon" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@900&display=swap");
       body {
@@ -12,12 +13,14 @@
         font-size: 22px;
         text-transform: uppercase;
         overflow: hidden;
-        /* background: black; */
+        background: linear-gradient(180deg, #000000, #434343);
       }
       li {
         list-style-type: none;
       }
       .disappear {
+        pointer-events: none;
+        z-index: -1;
         position: absolute;
         left: 0;
         right: 0;
@@ -34,6 +37,8 @@
         text-shadow: 0px 0px 0px gold;
         animation-duration: 3s;
         animation-iteration-count: infinite;
+        font-size: 32px;
+        margin: 0 5px;
       }
       .disappear span:nth-child(1) {
         animation-name: disappearleft;
@@ -76,12 +81,95 @@
           opacity: 0;
         }
       }
+
+      .main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        gap: 20px;
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        background-color: rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      }
+
+      .formdiv {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .formdiv div {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      input:focus {
+        outline: none;
+        box-shadow: 0 0 5px gold;
+      }
+
+      .formdiv div:focus-within label {
+        color: gold;
+      }
+
+      .label {
+        color: white;
+        margin-bottom: 5px;
+      }
+
+      .input {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      .btndiv {
+        display: flex;
+        justify-content: center;
+      }
+
+      .registerbtn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background-color: gold;
+        color: black;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .registerbtn:hover {
+        background-color: darkorange;
+      }
+
+      .bunch-of-stuff a {
+        color: #ccc1cc;
+        text-decoration: none;
+        font-size: 14px;
+        margin: 0 5px;
+      }
+
+      .bunch-of-stuff a:hover {
+        text-decoration: underline;
+      }
     </style>
   </head>
   <body>
     <main class="main">
       <a href="#" class="disappear"
-        ><span>S</span> <span>i</span> <span>g</span> <span>n</span> <span></span> <span>I</span> <span>n</span></a>
+        ><span>S</span> <span>i</span> <span>g</span> <span>n</span> <span></span> <span>I</span> <span>n</span></a
+      >
       <form class="form" id="Form">
         <div class="formdiv">
           <div>
@@ -97,6 +185,10 @@
           <button type="submit" class="registerbtn">Log In</button>
         </div>
       </form>
+      <section class="bunch-of-stuff">
+        <a href="../pages/signup.html">არ ხარ დარეგისტრირებული?</a>
+      </section>
+
     </main>
     <script src="../script/signin.js"></script>
   </body>

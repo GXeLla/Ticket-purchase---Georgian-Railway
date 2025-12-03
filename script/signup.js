@@ -6,23 +6,32 @@ registerForm.addEventListener("submit", async (event) => {
   const formData = new FormData(event.target);
   const userData = Object.fromEntries(formData);
 
-  console.log("📤 Submitting form with data:", userData);
+  console.log("ფორმის ინფორმაცია", userData);
 
   try {
-    console.log("➡️ Sending POST request...");
+    console.log("ვაგზავნით რეგისტრაციის მოთხოვნას /auth/sign_up");
     const response = await fetch("https://api.everrest.educata.dev/auth/sign_up", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userData),
     });
 
-    console.log("📥 Response object:", response);
-    console.log("📌 Response status:", response.status);
+    console.log("ობიექტი:", response);
+    console.log("სტატუსი:", response.status);
 
     const result = await response.json();
-    console.log("✅ Parsed JSON result:", result);
+    console.log("რეზულტატი", result);
+
+    if (result._id) {
+      localStorage.setItem("userId", result._id);
+      console.log(" _id დავამახსოვრეთ localStorage:", result._id);
+
+       window.location.href = "../pages/signin.html"; //===========================
+    } else {
+      console.log(" _id ვერ მოიძებნა რეზულტატში");
+    }
   } catch (error) {
-    console.log("❌ Fetch error:", error);
+    console.log("Fetch error:", error);
   }
 });
 
@@ -77,3 +86,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     StartAnimation(0);
   };
 });
+
+
+
