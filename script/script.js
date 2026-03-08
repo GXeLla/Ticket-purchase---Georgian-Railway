@@ -42,7 +42,7 @@ function updateDropdowns(stations) {
     .map(
       (station) => `
         <div onclick="setCity('departure-selector', '${station.name}')">${station.name}</div>
-    `
+    `,
     )
     .join("");
 
@@ -52,7 +52,7 @@ function updateDropdowns(stations) {
     .map(
       (station) => `
         <div onclick="setCity('arrival-selector', '${station.name}')">${station.name}</div>
-    `
+    `,
     )
     .join("");
 }
@@ -162,15 +162,20 @@ function submitForm() {
 
   // ახალ ლინკს ვქმნითპარამეტრებით
   const newPageUrl = `../pages/result.html?date=${encodeURIComponent(date)}&departure=${encodeURIComponent(
-    departure
+    departure,
   )}&arrival=${encodeURIComponent(arrival)}&ticketCount=${encodeURIComponent(ticketCount)}`; // ბილეთების რაოდენობა
 
   // ახალ ტაბში გახსნას
-  window.open(newPageUrl, "_blank");
+  // window.open(newPageUrl, "_blank");
+
+  window.location.href = newPageUrl;
 }
 
 // ფუნქცია ამუშავდეს მხოლოდ საბმით ტაიპ ბატონზე
-document.querySelector("button[type='submit']").addEventListener("click", submitForm);
+document.querySelector("form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  submitForm();
+});
 
 const welcomeText = document.getElementById("welcome");
 const cursor = document.getElementById("cursor");
@@ -339,14 +344,12 @@ function swapCities() {
   const departureInput = document.getElementById("departure-selector");
   const arrivalInput = document.getElementById("arrival-selector");
 
-  
   const temp = departureInput.value;
   departureInput.value = arrivalInput.value;
   arrivalInput.value = temp;
 
   closeAllDropdowns();
 }
-
 
 //parolis Secvla
 
@@ -435,7 +438,7 @@ cancelDelete.addEventListener("click", () => {
 
 // დათანხმება და ექაუნთის წაშლა
 confirmDelete.addEventListener("click", async () => {
-  deleteModal.style.display = "none"; 
+  deleteModal.style.display = "none";
   await deleteAccount(); // ფუნქციის გამოძახება ექაუნთის წაშლისთვის
 });
 
@@ -471,7 +474,7 @@ async function deleteAccount() {
 }
 
 function showTemporaryModal(message) {
-//მოდალის შექმნა
+  //მოდალის შექმნა
   const modal = document.createElement("div");
   modal.style.position = "fixed";
   modal.style.top = "0";
