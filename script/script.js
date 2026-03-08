@@ -161,9 +161,9 @@ function submitForm() {
   const arrival = document.getElementById("arrival-selector").value; //სად
 
   // ახალ ლინკს ვქმნითპარამეტრებით
-  const newPageUrl = `../pages/result.html?date=${encodeURIComponent(date)}&departure=${encodeURIComponent(
-    departure,
-  )}&arrival=${encodeURIComponent(arrival)}&ticketCount=${encodeURIComponent(ticketCount)}`; // ბილეთების რაოდენობა
+const newPageUrl = `pages/result.html?date=${encodeURIComponent(date)}&departure=${encodeURIComponent(
+  departure
+)}&arrival=${encodeURIComponent(arrival)}&ticketCount=${encodeURIComponent(ticketCount)}`; 
 
   // ახალ ტაბში გახსნას
   // window.open(newPageUrl, "_blank");
