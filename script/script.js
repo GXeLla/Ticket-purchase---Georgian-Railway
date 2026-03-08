@@ -163,8 +163,7 @@ function submitForm() {
   // ახალ ლინკს ვქმნითპარამეტრებით
 const newPageUrl = `pages/result.html?date=${encodeURIComponent(date)}&departure=${encodeURIComponent(
   departure
-)}&arrival=${encodeURIComponent(arrival)}&ticketCount=${encodeURIComponent(ticketCount)}`; 
-
+)}&arrival=${encodeURIComponent(arrival)}&ticketCount=${encodeURIComponent(ticketCount)}`;
   // ახალ ტაბში გახსნას
   // window.open(newPageUrl, "_blank");
 
